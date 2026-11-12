@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block title %}Reports{% endblock %}{% block body %}
+<h1>Reports</h1>{% include "_adminnav.html" %}<button class="btn ghost" onclick="window.print()">Print report</button>
+<h2>Stock vs. issued</h2><div class="scroll"><table><tr><th>Group</th><th>In stock</th><th>Issued (approved)</th></tr>
+{% set iss = {} %}{% for i in issued %}{% set _ = iss.update({i.blood_group: i.s}) %}{% endfor %}
+{% for s in stock %}<tr><td>{{ s.blood_group }}</td><td>{{ s.units }}</td><td>{{ iss.get(s.blood_group, 0) }}</td></tr>{% endfor %}</table></div>
+<h2>Donation history</h2><div class="scroll"><table><tr><th>Date</th><th>Donor</th><th>Group</th><th>Units</th></tr>
+{% for d in donations %}<tr><td>{{ d.donated_on }}</td><td>{{ d.name }}</td><td>{{ d.blood_group }}</td><td>{{ d.units }}</td></tr>
+{% else %}<tr><td colspan="4">No donations recorded.</td></tr>{% endfor %}</table></div>{% endblock %}

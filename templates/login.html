@@ -1,0 +1,6 @@
+{% extends "base.html" %}{% block title %}Log in{% endblock %}{% block body %}
+<form class="box" method="post"><h1>Log in</h1>
+<label for="e">Email</label><input id="e" name="email" type="email" required autofocus>
+<label for="p">Password</label><input id="p" name="password" type="password" required>
+<button>Log in</button>
+<p class="lbl">No account? <a href="{{ url_for('register') }}"><u>Register</u></a></p></form>{% endblock %}

@@ -1,0 +1,2 @@
+<div class="side">{% for ep,l in [('donor_dashboard','Overview'),('donate','Donate blood'),('donor_profile','My profile'),('notifications','Notifications')] %}
+<a class="{{ 'on' if request.endpoint==ep }}" href="{{ url_for(ep) }}">{{ l }}</a>{% endfor %}</div>

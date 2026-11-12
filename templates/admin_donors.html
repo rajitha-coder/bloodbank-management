@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% block title %}Donors{% endblock %}{% block body %}
+<h1>Donors</h1>{% include "_adminnav.html" %}
+<form class="filters" method="get"><select name="bg"><option value="">All groups</option>{% for g in groups %}<option {{ 'selected' if g==bg }}>{{ g }}</option>{% endfor %}</select>
+<input name="city" placeholder="City" value="{{ city }}"><button>Filter</button></form>
+<div class="scroll"><table><tr><th>Name</th><th>Group</th><th>Phone</th><th>City</th><th>Status</th><th></th></tr>
+{% for d in donors %}<tr><td>{{ d.name }}<br><span class="lbl">{{ d.email }}</span></td><td>{{ d.blood_group }}</td><td>{{ d.phone }}</td><td>{{ d.city }}</td>
+<td><span class="tag {{ d.status }}">{{ d.status }}</span></td>
+<td class="actions"><form method="post" action="{{ url_for('toggle_donor', uid=d.id) }}"><button class="btn ghost sm">{{ 'Disable' if d.status=='active' else 'Enable' }}</button></form>
+<form method="post" action="{{ url_for('delete_donor', uid=d.id) }}" onsubmit="return confirm('Delete this donor and their history?')"><button class="warn sm">Delete</button></form></td></tr>
+{% else %}<tr><td colspan="6">No donors match.</td></tr>{% endfor %}</table></div>{% endblock %}

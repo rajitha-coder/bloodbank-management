@@ -1,0 +1,31 @@
+CREATE TABLE IF NOT EXISTS users(
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(120) NOT NULL UNIQUE,
+  password_hash VARCHAR(255) NOT NULL,
+  role ENUM('admin','donor','patient') NOT NULL,
+  blood_group VARCHAR(3), phone VARCHAR(15), city VARCHAR(80), age INT, gender VARCHAR(10),
+  status VARCHAR(10) DEFAULT 'active'
+) ENGINE=InnoDB;
+CREATE TABLE IF NOT EXISTS inventory(
+  blood_group VARCHAR(3) PRIMARY KEY,
+  units INT NOT NULL DEFAULT 0
+) ENGINE=InnoDB;
+CREATE TABLE IF NOT EXISTS donations(
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  donor_id INT NOT NULL, blood_group VARCHAR(3) NOT NULL, units INT NOT NULL, donated_on VARCHAR(10) NOT NULL,
+  FOREIGN KEY (donor_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+CREATE TABLE IF NOT EXISTS requests(
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL, patient VARCHAR(100) NOT NULL, blood_group VARCHAR(3) NOT NULL, units INT NOT NULL,
+  hospital VARCHAR(120) NOT NULL, city VARCHAR(80), phone VARCHAR(15),
+  status ENUM('pending','approved','rejected') NOT NULL DEFAULT 'pending',
+  requested_on VARCHAR(10) NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+CREATE TABLE IF NOT EXISTS notifications(
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL, message VARCHAR(255) NOT NULL, created_on VARCHAR(10) NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB;

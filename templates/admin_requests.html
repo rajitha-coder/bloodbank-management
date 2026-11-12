@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% block title %}Requests{% endblock %}{% block body %}
+<h1>Blood requests</h1>{% include "_adminnav.html" %}
+<div class="scroll"><table><tr><th>ID</th><th>Patient</th><th>Group</th><th>Units</th><th>Hospital</th><th>City</th><th>Phone</th><th>Status</th><th></th></tr>
+{% for r in reqs %}<tr><td>{{ r.id }}</td><td>{{ r.patient }}</td><td>{{ r.blood_group }}</td><td>{{ r.units }}</td><td>{{ r.hospital }}</td><td>{{ r.city }}</td><td>{{ r.phone }}</td>
+<td><span class="tag {{ r.status }}">{{ r.status }}</span></td>
+<td class="actions">{% if r.status=='pending' %}
+<form method="post" action="{{ url_for('request_action', rid=r.id, action='approve') }}"><button class="ok sm btn">Approve</button></form>
+<form method="post" action="{{ url_for('request_action', rid=r.id, action='reject') }}"><button class="sm">Reject</button></form>{% endif %}
+<form method="post" action="{{ url_for('request_action', rid=r.id, action='delete') }}" onsubmit="return confirm('Delete this request?')"><button class="btn ghost sm">Delete</button></form></td></tr>
+{% else %}<tr><td colspan="9">No requests yet.</td></tr>{% endfor %}</table></div>{% endblock %}

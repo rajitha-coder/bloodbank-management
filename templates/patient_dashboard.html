@@ -1,0 +1,6 @@
+{% extends "base.html" %}{% block title %}Patient{% endblock %}{% block body %}
+<h1>Patient dashboard</h1><p class="sub">Request blood and track each request.</p>
+<div class="side"><a class="on" href="{{ url_for('patient_dashboard') }}">My requests</a><a href="{{ url_for('request_blood') }}">Request blood</a><a href="{{ url_for('notifications') }}">Notifications</a></div>
+<div class="scroll"><table><tr><th>Date</th><th>Patient</th><th>Group</th><th>Units</th><th>Hospital</th><th>Status</th></tr>
+{% for r in reqs %}<tr><td>{{ r.requested_on }}</td><td>{{ r.patient }}</td><td>{{ r.blood_group }}</td><td>{{ r.units }}</td><td>{{ r.hospital }}</td><td><span class="tag {{ r.status }}">{{ r.status }}</span></td></tr>
+{% else %}<tr><td colspan="6">No requests yet. Use Request blood to create one.</td></tr>{% endfor %}</table></div>{% endblock %}

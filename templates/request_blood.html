@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block title %}Request blood{% endblock %}{% block body %}
+<form class="box" method="post"><h1>Request blood</h1>
+<label>Patient name</label><input name="patient" value="{{ f.patient }}" required>
+<label>Blood group</label><select name="blood_group">{% for g in groups %}<option {{ 'selected' if f.blood_group==g }}>{{ g }}</option>{% endfor %}</select>
+<label>Units needed (1 to 10)</label><input name="units" type="number" min="1" max="10" value="{{ f.units }}" required>
+<label>Hospital</label><input name="hospital" value="{{ f.hospital }}" required>
+<label>City</label><input name="city" value="{{ f.city }}">
+<label>Contact phone</label><input name="phone" value="{{ f.phone }}" pattern="\d{10}" required>
+<button>Submit request</button></form>{% endblock %}

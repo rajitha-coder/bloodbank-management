@@ -1,0 +1,6 @@
+{% extends "base.html" %}{% block title %}Donate{% endblock %}{% block body %}
+<h1>Donate blood</h1>{% include "_donornav.html" %}
+<div class="card"><p>Your blood group: <b>{{ me.blood_group }}</b></p>
+<p class="sub">{% if last %}Last donation: {{ last }} ({{ days }} days ago). Donors can give again after 90 days.{% else %}This is your first donation.{% endif %}</p>
+{% if eligible %}<form method="post"><button>Record 1 unit donation</button></form>
+{% else %}<p>You can donate again in {{ 90 - days }} day(s).</p>{% endif %}</div>{% endblock %}

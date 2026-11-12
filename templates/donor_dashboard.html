@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block title %}Donor{% endblock %}{% block body %}
+<h1>Welcome, {{ session.name }}</h1><p class="sub">Thank you for donating blood.</p>{% include "_donornav.html" %}
+<div class="grid"><div class="card"><div class="lbl">Total donations</div><div class="big">{{ total }}</div></div>
+<div class="card"><div class="lbl">Lives you may have helped</div><div class="big">{{ total*3 }}</div></div>
+<div class="card"><div class="lbl">Last donation</div><div class="big" style="font-size:22px">{{ don[0].donated_on if don else 'None yet' }}</div></div></div>
+<h2>Recent activity</h2>{% for n in notes %}<div class="card" style="margin-bottom:8px">{{ n.message }} <span class="lbl">· {{ n.created_on }}</span></div>{% else %}<p class="sub">No activity yet.</p>{% endfor %}
+<h2>Donation history</h2><div class="scroll"><table><tr><th>Date</th><th>Group</th><th>Units</th></tr>
+{% for d in don %}<tr><td>{{ d.donated_on }}</td><td>{{ d.blood_group }}</td><td>{{ d.units }}</td></tr>{% else %}<tr><td colspan="3">No donations yet.</td></tr>{% endfor %}</table></div>{% endblock %}

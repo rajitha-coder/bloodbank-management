@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% block title %}Blood Bank{% endblock %} · Blood Bank Management System</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body>
+<header class="top"><a class="brand" href="{{ url_for('home') }}">BloodBank</a>
+<nav>
+<a href="{{ url_for('home') }}">Home</a>
+<a href="{{ url_for('emergency') }}">Emergency search</a>
+{% if session.uid %}
+<a href="{{ url_for('dashboard') }}">Dashboard</a>
+<a class="btn sm" href="{{ url_for('logout') }}">Log out</a>
+{% else %}
+<a href="{{ url_for('register') }}">Register</a>
+<a class="btn sm" href="{{ url_for('login') }}">Log in</a>
+{% endif %}
+</nav></header>
+<main class="wrap">
+{% with msgs = get_flashed_messages(with_categories=true) %}{% for c,m in msgs %}<div class="flash {{c}}">{{ m }}</div>{% endfor %}{% endwith %}
+{% block body %}{% endblock %}
+</main></body></html>

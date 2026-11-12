@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block title %}Inventory{% endblock %}{% block body %}
+<h1>Inventory</h1>{% include "_adminnav.html" %}{% include "_stock.html" %}
+<form class="box" method="post"><h2 style="margin-top:0">Set stock level</h2>
+<label>Blood group</label><select name="blood_group">{% for s in stock %}<option>{{ s.blood_group }}</option>{% endfor %}</select>
+<label>Units</label><input name="units" type="number" min="0" required><button>Save stock</button></form>{% endblock %}

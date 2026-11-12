@@ -1,0 +1,7 @@
+{% extends "base.html" %}{% block title %}Profile{% endblock %}{% block body %}
+<h1>My profile</h1>{% include "_donornav.html" %}
+<form class="box" method="post" style="margin-left:0">
+<label>Name</label><input value="{{ me.name }}" disabled><label>Email</label><input value="{{ me.email }}" disabled>
+<label>Blood group</label><input value="{{ me.blood_group }}" disabled>
+<label>Phone</label><input name="phone" value="{{ me.phone }}" pattern="\d{10}" required>
+<label>City</label><input name="city" value="{{ me.city }}"><button>Save profile</button></form>{% endblock %}

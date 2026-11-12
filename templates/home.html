@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block body %}
+<section class="hero"><h1>Donate blood, save lives.</h1>
+<p>One place for donors, patients and hospitals to register, request blood and see what is in stock right now.</p>
+<div class="row"><a class="btn" href="{{ url_for('register') }}">Become a donor</a>
+<a class="btn ghost" href="{{ url_for('emergency') }}">Find blood now</a></div></section>
+<h2>Units in stock</h2>{% include "_stock.html" %}
+<p class="sub" style="margin-top:10px">Amber means 5 units or fewer. Red means none.</p>
+{% endblock %}

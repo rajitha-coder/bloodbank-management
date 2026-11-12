@@ -1,0 +1,3 @@
+<div class="side">
+{% for ep,label in [('admin_dashboard','Overview'),('admin_donors','Donors'),('admin_requests','Requests'),('admin_inventory','Inventory'),('admin_reports','Reports')] %}
+<a class="{{ 'on' if request.endpoint==ep }}" href="{{ url_for(ep) }}">{{ label }}</a>{% endfor %}</div>

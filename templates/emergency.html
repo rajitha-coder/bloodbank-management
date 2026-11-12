@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% block title %}Emergency search{% endblock %}{% block body %}
+<h1>Emergency blood search</h1><p class="sub">Check stock and find active donors for a blood group.</p>
+<form class="filters" method="get"><select name="bg">{% for g in groups %}<option {{ 'selected' if g==bg }}>{{ g }}</option>{% endfor %}</select><button>Search</button></form>
+{% if stock %}
+<div class="card"><span class="lbl">{{ bg }} units available</span><div class="big">{{ stock.units }}</div></div>
+<h2>Active {{ bg }} donors</h2>
+{% if donors %}<div class="scroll"><table><tr><th>Name</th><th>City</th><th>Phone</th></tr>
+{% for d in donors %}<tr><td>{{ d.name }}</td><td>{{ d.city }}</td><td>{{ d.phone }}</td></tr>{% endfor %}</table></div>
+{% else %}<p class="sub">No active donors with this group yet.</p>{% endif %}
+{% endif %}{% endblock %}
